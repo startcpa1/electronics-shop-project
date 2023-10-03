@@ -1,9 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 
+
 def tests_total_price():
-
-
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
 
@@ -19,3 +18,23 @@ def tests_total_price():
     assert item2.price == 20000
 
     # assert Item.all == '[<src.item.Item object at 0x10e5f6490>, <src.item.Item object at 0x10e5f5b10>]'
+
+
+def test_name():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("СуперСмартфон", 10000, 20)
+    assert item1.name == 'Смартфон'
+    assert item1.price == 10000
+    assert item1.quantity == 20
+    assert item2.name == 'СуперСмартфон'
+
+
+def tests_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('../src/items.csv')  # создание объектов из данных файла
+    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
