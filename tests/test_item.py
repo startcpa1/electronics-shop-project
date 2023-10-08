@@ -27,6 +27,7 @@ def test_name():
     assert item1.price == 10000
     assert item1.quantity == 20
     assert item2.name == 'СуперСмартфон'
+    assert len(item2.name) == len(item2.name) > 10
 
 
 def tests_string_to_number():  # проверка перевода строки в число

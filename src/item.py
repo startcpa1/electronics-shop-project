@@ -79,4 +79,11 @@ class Item:
         """
         return f'{self.name}'
 
-
+    def __add__(self, other):
+        """
+        Складывает количество товаров
+        """
+        if issubclass(other.__class__, self.__class__) or issubclass(self.__class__, other.__class__):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError('Невозможно сложить объекты разных типов')
