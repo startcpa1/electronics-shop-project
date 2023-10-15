@@ -15,3 +15,4 @@ if __name__ == '__main__':
 
     phone1.number_of_sim = 1
     # ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.
+print(repr(item1))

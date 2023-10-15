@@ -37,7 +37,7 @@ def tests_string_to_number():  # проверка перевода строки 
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('../src/items.csv')  # создание объектов из данных файла
+    Item.instantiate_from_csv()  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
 

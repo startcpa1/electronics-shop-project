@@ -35,7 +35,7 @@ class Item:
             self.__name = value
 
     @classmethod
-    def instantiate_from_csv(cls, filename):
+    def instantiate_from_csv(cls):
         """Загружает данные из файла csv разбирая по названию, цене, кол-ву"""
         cls.all = []
         filename = '../src/items.csv'
