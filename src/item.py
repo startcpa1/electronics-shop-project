@@ -1,4 +1,15 @@
 import csv
+import os
+
+
+class InstantiateCSVError(Exception):
+    """Класс для обработки ошибки поврежденного файла """
+
+    def __init__(self, *args, **kwargs):
+        self.message = 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
 
 
 class Item:
@@ -35,16 +46,23 @@ class Item:
             self.__name = value
 
     @classmethod
-    def instantiate_from_csv(cls):
-        """Загружает данные из файла csv разбирая по названию, цене, кол-ву"""
+    def instantiate_from_csv(cls, filename):
+        """Загружает данные из файла csv разбирая по названию, цене, кол-ву
+        и проверяет, что файл существует и не поврежден"""
+        path_ = os.path.dirname(__file__)
+        file_path = os.path.join(path_, filename)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError('Отсутствует файл item.csv')
+
         cls.all = []
-        filename = '../src/items.csv'
-        with open(filename, 'r', encoding='cp1251') as f:
+        with open(file_path, 'r', encoding='cp1251') as f:
             get_load_data = csv.DictReader(f)
             for row in get_load_data:
-                name = row['name']
-                price = cls.string_to_number(row['price'])
-                quantity = cls.string_to_number(row['quantity'])
+                name = row.get('name')
+                price = row.get('price')
+                quantity = row.get('quantity')
+                if not name or price or quantity:
+                    raise InstantiateCSVError
                 cls(name, price, quantity)
 
     @staticmethod
